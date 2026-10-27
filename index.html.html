@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Politeknik Negeri Banyuwangi - Poliwangi Redesign</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome 6 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        poliwangi: {
+                            navy: '#002b5b',
+                            blue: '#0056b3',
+                            dark: '#07182c',
+                            gold: '#f4b400',
+                            goldhover: '#d99e00',
+                            accent: '#eab308',
+                            slateBg: '#f8fafc'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Utilities & Standard Image Aspect Ratio Rules */
+        .thumb-standard {
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        .thumb-small {
+            aspect-ratio: 16 / 10;
+            width: 110px;
+            height: 70px;
+            object-fit: cover;
+            object-position: center;
+            flex-shrink: 0;
+        }
+        .rubrik-header-line {
+            height: 3px;
+            background-color: #f4b400;
+            flex-grow: 1;
+            border-radius: 999px;
+        }
+        /* Hide scrollbars for slick look */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased flex flex-col min-h-screen">
+
+    <!-- TOP BAR INFO -->
+    <div class="bg-poliwangi-dark text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center space-x-6">
+                <span class="flex items-center gap-2"><i class="fa-solid fa-envelope text-poliwangi-gold"></i> humas@poliwangi.ac.id</span>
+                <span class="flex items-center gap-2"><i class="fa-solid fa-phone text-poliwangi-gold"></i> (0333) 636780</span>
+                <span class="hidden md:flex items-center gap-2"><i class="fa-solid fa-location-dot text-poliwangi-gold"></i> Jl. Raya Jember KM 13 Kabat, Banyuwangi</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="hover:text-poliwangi-gold transition"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-poliwangi-gold transition"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-poliwangi-gold transition"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="hover:text-poliwangi-gold transition"><i class="fa-brands fa-linkedin-in"></i></a>
+                <span class="text-slate-600">|</span>
+                <button class="hover:text-poliwangi-gold font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-globe"></i> ID
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN NAVBAR -->
+    <header class="bg-white shadow-md sticky top-0 z-50 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo & Campus Brand -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchView('beranda')">
+                    <img src="https://v2.poliwangi.ac.id/wp-content/uploads/2024/07/LOGO-POLIWANGI-REV-2.png" 
+                         onerror="this.onerror=null; this.src='https://placehold.co/80x80/002b5b/ffffff?text=POLIWANGI';" 
+                         alt="Logo Poliwangi" class="h-14 w-auto object-contain">
+                    <div>
+                        <span class="block text-xl font-extrabold text-poliwangi-navy tracking-tight uppercase leading-none">POLITEKNIK NEGERI BANYUWANGI</span>
+                        <span class="text-xs font-semibold text-slate-500 tracking-wider">Unggul, Inovatif, dan Berdaya Saing Global</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center space-x-1 font-semibold text-sm text-slate-700">
+                    <button onclick="switchView('beranda')" id="nav-beranda" class="px-3 py-2 rounded-lg text-poliwangi-navy hover:text-poliwangi-blue hover:bg-slate-100 transition">Beranda</button>
+                    <a href="#keunggulan" onclick="switchView('beranda')" class="px-3 py-2 rounded-lg hover:text-poliwangi-blue hover:bg-slate-100 transition">Profil</a>
+                    <a href="#berita-terbaru" onclick="switchView('beranda')" class="px-3 py-2 rounded-lg hover:text-poliwangi-blue hover:bg-slate-100 transition">Berita</a>
+                    <a href="#pengumuman" onclick="switchView('beranda')" class="px-3 py-2 rounded-lg hover:text-poliwangi-blue hover:bg-slate-100 transition">Pengumuman</a>
+                    <a href="#rubrik-section" onclick="switchView('beranda')" class="px-3 py-2 rounded-lg hover:text-poliwangi-blue hover:bg-slate-100 transition">Rubrik</a>
+                    <button onclick="switchView('detail-berita')" id="nav-detail" class="px-3 py-2 rounded-lg hover:text-poliwangi-blue hover:bg-slate-100 transition flex items-center gap-1 text-poliwangi-blue font-bold">
+                        <i class="fa-solid fa-newspaper text-xs"></i> Contoh Artikel Detail
+                    </button>
+                </nav>
+
+                <!-- Search & Mobile Menu Button -->
+                <div class="flex items-center space-x-3">
+                    <div class="relative hidden sm:block">
+                        <input type="text" placeholder="Cari informasi..." class="w-44 focus:w-60 bg-slate-100 text-xs text-slate-800 rounded-full py-2 pl-4 pr-8 focus:outline-none focus:ring-2 focus:ring-poliwangi-blue transition-all duration-300">
+                        <i class="fa-solid fa-magnifying-glass absolute right-3 top-2.5 text-slate-400 text-xs"></i>
+                    </div>
+                    <button onclick="toggleMobileMenu()" class="lg:hidden text-slate-700 hover:text-poliwangi-navy p-2 rounded-lg text-xl focus:outline-none">
+                        <i class="fa-solid fa-bars" id="mobile-menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-200 px-4 pt-2 pb-6 space-y-2 shadow-lg">
+            <button onclick="switchView('beranda'); toggleMobileMenu()" class="block w-full text-left px-4 py-2 text-sm font-semibold rounded-lg text-poliwangi-navy hover:bg-slate-100">Beranda</button>
+            <a href="#keunggulan" onclick="toggleMobileMenu()" class="block px-4 py-2 text-sm font-semibold rounded-lg hover:bg-slate-100">Keunggulan Kampus</a>
+            <a href="#berita-terbaru" onclick="toggleMobileMenu()" class="block px-4 py-2 text-sm font-semibold rounded-lg hover:bg-slate-100">Berita Terbaru (3 Grid)</a>
+            <a href="#pengumuman" onclick="toggleMobileMenu()" class="block px-4 py-2 text-sm font-semibold rounded-lg hover:bg-slate-100">Pengumuman (4 Grid)</a>
+            <a href="#rubrik-section" onclick="toggleMobileMenu()" class="block px-4 py-2 text-sm font-semibold rounded-lg hover:bg-slate-100">Rubrik 3 Kolom</a>
+            <button onclick="switchView('detail-berita'); toggleMobileMenu()" class="block w-full text-left px-4 py-2 text-sm font-bold text-poliwangi-blue rounded-lg bg-slate-100">Halaman Detail Berita (Sidebar)</button>
+        </div>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- VIEW 1: BERANDA PAGE CONTENT -->
+    <!-- ========================================== -->
+    <main id="view-beranda" class="flex-grow transition-opacity duration-300">
+        
+        <!-- REQUIREMENT 1 & 6 & 7: HERO BANNER CAROUSEL (FULL IMAGE, NO WELCOME OVERLAY TEXT, PROPORTIONAL) -->
+        <section class="relative w-full bg-slate-900 overflow-hidden">
+            <div id="carousel-slides" class="relative w-full h-[320px] sm:h-[450px] md:h-[550px] lg:h-[620px] transition-all duration-700 ease-in-out">
+                
+                <!-- Slide 1 -->
+                <div class="carousel-item active absolute inset-0 w-full h-full transition-opacity duration-1000 opacity-100">
+                    <img src="https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?q=80&w=1920&auto=format&fit=crop" 
+                         alt="Gedung Poliwangi" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Slide 2 -->
+                <div class="carousel-item absolute inset-0 w-full h-full transition-opacity duration-1000 opacity-0">
+                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1920&auto=format&fit=crop" 
+                         alt="Kegiatan Perkuliahan Vokasi" class="w-full h-full object-cover">
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-item absolute inset-0 w-full h-full transition-opacity duration-1000 opacity-0">
+                    <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=1920&auto=format&fit=crop" 
+                         alt="Laboratorium Inovasi Poliwangi" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <!-- Slider Controls -->
+            <button onclick="prevHeroSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-poliwangi-gold text-white hover:text-poliwangi-dark w-12 h-12 rounded-full flex items-center justify-center transition backdrop-blur-sm z-10 focus:outline-none">
+                <i class="fa-solid fa-chevron-left text-lg"></i>
+            </button>
+            <button onclick="nextHeroSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-poliwangi-gold text-white hover:text-poliwangi-dark w-12 h-12 rounded-full flex items-center justify-center transition backdrop-blur-sm z-10 focus:outline-none">
+                <i class="fa-solid fa-chevron-right text-lg"></i>
+            </button>
+
+            <!-- Slide Indicators -->
+            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2 z-10">
+                <button onclick="setHeroSlide(0)" class="carousel-dot w-8 h-2 rounded-full bg-poliwangi-gold transition-all duration-300"></button>
+                <button onclick="setHeroSlide(1)" class="carousel-dot w-3 h-2 rounded-full bg-white/60 hover:bg-white transition-all duration-300"></button>
+                <button onclick="setHeroSlide(2)" class="carousel-dot w-3 h-2 rounded-full bg-white/60 hover:bg-white transition-all duration-300"></button>
+            </div>
+        </section>
+
+        <!-- REQUIREMENT 8: KEUNGGULAN POLIWANGI (DI BAWAH BANNER HERO) -->
+        <section id="keunggulan" class="py-16 bg-white relative z-10 border-b border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-14">
+                    <span class="text-poliwangi-blue text-xs font-bold uppercase tracking-widest bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-100 inline-block mb-3">
+                        Kualitas & Integritas
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-poliwangi-navy tracking-tight">
+                        Mengapa Memilih Poliwangi?
+                    </h2>
+                    <p class="mt-4 text-slate-600 text-base leading-relaxed">
+                        Pendidikan vokasi yang membangun kompetensi, mendorong inovasi, dan menciptakan dampak nyata bagi masa depan.
+                    </p>
+                </div>
+
+                <!-- 4 Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    
+                    <!-- Card 1 -->
+                    <div class="bg-slate-50 hover:bg-white p-7 rounded-2xl border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+                        <div>
+                            <div class="w-14 h-14 rounded-xl bg-poliwangi-navy group-hover:bg-poliwangi-gold text-poliwangi-gold group-hover:text-poliwangi-navy flex items-center justify-center text-2xl mb-6 shadow-md transition-colors duration-300">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-poliwangi-navy mb-3 group-hover:text-poliwangi-blue transition-colors">
+                                Pendidikan Vokasi Unggul
+                            </h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">
+                                Pembelajaran berbasis praktik dan proyek untuk membangun kompetensi yang relevan dengan kebutuhan dunia kerja.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-slate-50 hover:bg-white p-7 rounded-2xl border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+                        <div>
+                            <div class="w-14 h-14 rounded-xl bg-poliwangi-navy group-hover:bg-poliwangi-gold text-poliwangi-gold group-hover:text-poliwangi-navy flex items-center justify-center text-2xl mb-6 shadow-md transition-colors duration-300">
+                                <i class="fa-solid fa-handshake-angle"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-poliwangi-navy mb-3 group-hover:text-poliwangi-blue transition-colors">
+                                Kolaborasi dengan Dunia Industri
+                            </h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">
+                                Membuka peluang pengalaman kerja, magang, dan kolaborasi untuk mempersiapkan lulusan menghadapi dunia profesional.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-slate-50 hover:bg-white p-7 rounded-2xl border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+                        <div>
+                            <div class="w-14 h-14 rounded-xl bg-poliwangi-navy group-hover:bg-poliwangi-gold text-poliwangi-gold group-hover:text-poliwangi-navy flex items-center justify-center text-2xl mb-6 shadow-md transition-colors duration-300">
+                                <i class="fa-solid fa-lightbulb"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-poliwangi-navy mb-3 group-hover:text-poliwangi-blue transition-colors">
+                                Inovasi dan Technopreneurship
+                            </h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">
+                                Mendorong kreativitas, inovasi teknologi, dan jiwa kewirausahaan untuk menciptakan peluang serta lapangan kerja.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="bg-slate-50 hover:bg-white p-7 rounded-2xl border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+                        <div>
+                            <div class="w-14 h-14 rounded-xl bg-poliwangi-navy group-hover:bg-poliwangi-gold text-poliwangi-gold group-hover:text-poliwangi-navy flex items-center justify-center text-2xl mb-6 shadow-md transition-colors duration-300">
+                                <i class="fa-solid fa-building-columns"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-poliwangi-navy mb-3 group-hover:text-poliwangi-blue transition-colors">
+                                Kampus Berdampak
+                            </h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">
+                                Mengembangkan kompetensi dan karya nyata yang memberikan manfaat bagi masyarakat serta mendukung potensi daerah.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- REQUIREMENT 1 & 5 & 7: BERITA TERBARU SECTION (REPLACES OLD BERITA UTAMA) WITH STANDARDIZED THUMBNAILS (GRID 3 KOTAK) -->
+        <section id="berita-terbaru" class="py-16 bg-slate-50 border-t border-slate-200/70">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Title -->
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 pb-4 border-b border-slate-200">
+                    <div>
+                        <div class="flex items-center space-x-2 text-poliwangi-blue text-xs font-bold uppercase tracking-widest mb-1">
+                            <i class="fa-solid fa-newspaper text-poliwangi-gold"></i>
+                            <span>Informasi Terkini Kampus</span>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-poliwangi-navy tracking-tight">Berita Terbaru</h2>
+                    </div>
+                    <a href="#" onclick="switchView('detail-berita')" class="mt-4 sm:mt-0 text-sm font-bold text-poliwangi-blue hover:text-poliwangi-navy flex items-center gap-1 transition">
+                        Lihat Semua Berita <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Grid 3 Kotak Berita Terbaru -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- News Card 1 -->
+                    <article onclick="switchView('detail-berita')" class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200/80 cursor-pointer group flex flex-col justify-between">
+                        <div>
+                            <div class="relative overflow-hidden">
+                                <!-- Standardized 16:9 Thumbnail, No Cut Off -->
+                                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop" 
+                                     alt="Tim Robotik Poliwangi" 
+                                     class="thumb-standard group-hover:scale-105 transition-transform duration-500">
+                                <span class="absolute top-3 left-3 bg-poliwangi-navy/90 text-poliwangi-gold text-[11px] font-extrabold px-3 py-1 rounded-md shadow-md backdrop-blur-sm">
+                                    BERITA TERBARU
+                                </span>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-center text-xs text-slate-400 font-semibold mb-2">
+                                    <i class="fa-regular fa-clock mr-1.5 text-poliwangi-gold"></i>
+                                    <span>26 Oktober 2026, 09.15 WIB</span>
+                                </div>
+                                <h3 class="text-lg font-bold text-poliwangi-navy group-hover:text-poliwangi-blue transition-colors line-clamp-2 leading-snug mb-3">
+                                    Tim Robotik Poliwangi Raih Juara Pertama Kompetisi Inovasi Teknologi Nasional 2026
+                                </h3>
+                                <p class="text-slate-600 text-xs leading-relaxed line-clamp-3">
+                                    Mahasiswa Poliwangi sukses menorehkan prestasi gemilang tingkat nasional dengan menciptakan robotika otomatis penanam bibit padi presisi tinggi.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="px-6 pb-6 pt-2 flex items-center text-xs font-bold text-poliwangi-blue group-hover:text-poliwangi-navy">
+                            <span>Baca Selengkapnya</span>
+                            <i class="fa-solid fa-chevron-right ml-1 group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </article>
+
+                    <!-- News Card 2 -->
+                    <article onclick="switchView('detail-berita')" class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200/80 cursor-pointer group flex flex-col justify-between">
+                        <div>
+                            <div class="relative overflow-hidden">
+                                <!-- Standardized 16:9 Thumbnail, No Cut Off -->
+                                <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=800&auto=format&fit=crop" 
+                                     alt="Kerjasama Industri Poliwangi" 
+                                     class="thumb-standard group-hover:scale-105 transition-transform duration-500">
+                                <span class="absolute top-3 left-3 bg-poliwangi-navy/90 text-poliwangi-gold text-[11px] font-extrabold px-3 py-1 rounded-md shadow-md backdrop-blur-sm">
+                                    KERJASAMA
+                                </span>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-center text-xs text-slate-400 font-semibold mb-2">
+                                    <i class="fa-regular fa-clock mr-1.5 text-poliwangi-gold"></i>
+                                    <span>24 Oktober 2026, 14.30 WIB</span>
+                                </div>
+                                <h3 class="text-lg font-bold text-poliwangi-navy group-hover:text-poliwangi-blue transition-colors line-clamp-2 leading-snug mb-3">
+                                    Poliwangi Resmi Tanda Tangani MoU Magang Industri dengan PT KAI & PT PAL Indonesia
+                                </h3>
+                                <p class="text-slate-600 text-xs leading-relaxed line-clamp-3">
+                                    Kolaborasi strategis ini membuka jalan bagi ratusan mahasiswa Poliwangi untuk merasakan pengalaman kerja nyata berbasis standar industri BUMN.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="px-6 pb-6 pt-2 flex items-center text-xs font-bold text-poliwangi-blue group-hover:text-poliwangi-navy">
+                            <span>Baca Selengkapnya</span>
+                            <i class="fa-solid fa-chevron-right ml-1 group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </article>
+
+                    <!-- News Card 3 -->
+                    <article onclick="switchView('detail-berita')" class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200/80 cursor-pointer group flex flex-col justify-between">
+                        <div>
+                            <div class="relative overflow-hidden">
+                                <!-- Standardized 16:9 Thumbnail, No Cut Off -->
+                                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop" 
+                                     alt="Kurikulum OBE Poliwangi" 
+                                     class="thumb-standard group-hover:scale-105 transition-transform duration-500">
+                                <span class="absolute top-3 left-3 bg-poliwangi-navy/90 text-poliwangi-gold text-[11px] font-extrabold px-3 py-1 rounded-md shadow-md backdrop-blur-sm">
+                                    AKADEMIK
+                                </span>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-center text-xs text-slate-400 font-semibold mb-2">
+                                    <i class="fa-regular fa-clock mr-1.5 text-poliwangi-gold"></i>
+                                    <span>22 Oktober 2026, 11.00 WIB</span>
+                                </div>
+                                <h3 class="text-lg font-bold text-poliwangi-navy group-hover:text-poliwangi-blue transition-colors line-clamp-2 leading-snug mb-3">
+                                    Penerapan Curriculum Outcome-Based Education (OBE) Menghadapi Tantangan Era AI
+                                </h3>
+                                <p class="text-slate-600 text-xs leading-relaxed line-clamp-3">
+                                    Poliwangi memperbarui kurikulum vokasi berbasis hasil pembelajaran interdisipliner untuk memperkuat lulusan yang siap beradaptasi dengan kecerdasan buatan.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="px-6 pb-6 pt-2 flex items-center text-xs font-bold text-poliwangi-blue group-hover:text-poliwangi-navy">
+                            <span>Baca Selengkapnya</span>
+                            <i class="fa-solid fa-chevron-right ml-1 group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- REQUIREMENT 2: PENGUMUMAN SECTION (REPLACES OLD BERITA TERBARU, GRID 4 KOTAK) -->
+        <section id="pengumuman" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Title -->
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 pb-4 border-b border-slate-200">
+                    <div>
+                        <div class="flex items-center space-x-2 text-poliwangi-blue text-xs font-bold uppercase tracking-widest mb-1">
+                            <i class="fa-solid fa-bullhorn text-poliwangi-gold"></i>
+                            <span>Informasi Resmi & Edaran</span>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-poliwangi-navy tracking-tight">Pengumuman Kampus</h2>
+                    </div>
+                    <a href="#" class="mt-4 sm:mt-0 text-sm font-bold text-poliwangi-blue hover:text-poliwangi-navy flex items-center gap-1 transition">
+                        Semua Pengumuman <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Grid 4 Kotak Pengumuman -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <!-- Announcement 1 -->
+                    <div class="bg-slate-50 border border-slate-200/90 rounded-2xl p-5 hover:border-poliwangi-blue hover:shadow-lg transition-all duration-300 flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="bg-blue-100 text-poliwangi-blue text-[10px] font-bold px-2.5 py-1 rounded-md uppercase">
+                                    Akademik
+                                </span>
+                                <span class="text-xs text-slate-400 font-medium">27 Okt 2026</span>
+                            </div>
+                            <h3 class="text-sm font-bold text-poliwangi-navy group-hover:text-poliwangi-blue transition-colors line-clamp-3 mb-3 leading-snug">
+                                Jadwal Pelaksanaan Ujian Akhir Semester (UAS) Ganjil TA 2026/2027
+                            </h3>
+                            <p class="text-slate-500 text-xs line-clamp-2 mb-4">
+                                Informasi lengkap petunjuk teknis dan ruang ujian UAS ganjil mahasiswa Poliwangi.
+                            </p>
+                        </div>
+                        <button onclick="downloadAnnouncement('Jadwal_UAS_2026.pdf')" class="w-full py-2 bg-white hover:bg-poliwangi-navy text-poliwangi-navy hover:text-white border border-slate-200 text-xs font-bold rounded-lg transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-file-pdf text-red-500"></i> Unduh Berkas
+                        </button>
+                    </div>
+
+                    <!-- Announcement 2 -->
+                    <div class="bg-slate-50 border border-slate-200/90 rounded-2xl p-5 hover:border-poliwangi-blue hover:shadow-lg transition-all duration-300 flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2.5 py-1 rounded-md uppercase">
+                                    Beasiswa
+                                </span>
+                                <span class="text-xs text-slate-400 font-medium">25 Okt 2026</span>
+                            </div>
+                            <h3 class="text-sm font-bold text-poliwangi-navy group-hover:text-poliwangi-blue transition-colors line-clamp-3 mb-3 leading-snug">
+                                Pendaftaran Beasiswa Industri Prestasi Berbakti Negeri Periode II
+                            </h3>
+                            <p class="text-slate-500 text-xs line-clamp-2 mb-4">
+                                Persyaratan berkas dan tata cara pendaftaran beasiswa penuh untuk mahasiswa semester 3 dan 5.
+                            </p>
+                        </div>
+                        <button onclick="downloadAnnouncement('Beasiswa_2026.pdf')" class="w-full py-2 bg-white hover:bg-poliwangi-navy text-poliwangi-navy hover:text-white border border-slate-200 text-xs font-bold rounded-lg transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-file-pdf text-red-500"></i> Unduh Berkas
+                        </button>
+                    </div>
+
+                    <!-- Announcement 3 -->
+                    <div class="bg-slate-50 border border-slate-200/90 rounded-2xl p-5 hover:border-poliwangi-blue hover:shadow-lg transition-all duration-300 flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-1 rounded-md uppercase">
+                                    Kemahasiswaan
+                                </span>
+                                <span class="text-xs text-slate-400 font-medium">21 Okt 2026</span>
+                            </div>
+                            <h3 class="text-sm font-bold text-poliwangi-navy group-hover:text-poliwangi-blue transition-colors line-clamp-3 mb-3 leading-snug">
+                                Edaran Orientasi Kewirausahaan Muda & Festival Technopreneur 2026
+                            </h3>
+                            <p class="text-slate-500 text-xs line-clamp-2 mb-4">
+                                Undangan terbuka bagi seluruh UKM dan civitas akademika Poliwangi.
+                            </p>
+                        </div>
+                        <button onclick="downloadAnnouncement('Edaran_Festival_2026.pdf')" class="w-full py-2 bg-white hover:bg-poliwangi-navy text-poliwangi-navy hover:text-white border border-slate-200 text-xs font-bold rounded-lg transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-file-pdf text-red-500"></i> Unduh Berkas
+                        </button>
+                    </div>
+
+                    <!-- Announcement 4 -->
+                    <div class="bg-slate-50 border border-slate-200/90 rounded-2xl p-5 hover:border-poliwangi-blue hover:shadow-lg transition-all duration-300 flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="bg-purple-100 text-purple-800 text-[10px] font-bold px-2.5 py-1 rounded-md uppercase">
+                                    Wisuda
+                                </span>
+                                <span class="text-xs text-slate-400 font-medium">18 Okt 2026</span>
+                            </div>
+                            <h3 class="text-sm font-bold text-poliwangi-navy group-hover:text-poliwangi-blue transition-colors line-clamp-3 mb-3 leading-snug">
+                                Gladi Bersih dan Tata Tertib Pelaksanaan Wisuda Periode IV 2026
+                            </h3>
+                            <p class="text-slate-500 text-xs line-clamp-2 mb-4">
+                                Panduan teknis kehadiran calon wisudawan dan pembagian toga resmi kampus.
+                            </p>
+                        </div>
+                        <button onclick="downloadAnnouncement('Wisuda_Periode_IV.pdf')" class="w-full py-2 bg-white hover:bg-poliwangi-navy text-poliwangi-navy hover:text-white border border-slate-200 text-xs font-bold rounded-lg transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-file-pdf text-red-500"></i> Unduh Berkas
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- REQUIREMENT 4 & 5 & 7: RUBRIK 3 KOLOM (KERJASAMA | PRESTASI | PENELITIAN DAN INOVASI) - MATCHING SAMPLE IMAGE DESIGN EXACTLY -->
+        <section id="rubrik-section" class="py-16 bg-slate-50 border-t border-slate-200/70">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- 3 Columns Layout -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                    
+                    <!-- ================= COLUMN 1: KERJASAMA ================= -->
+                    <div class="flex flex-col space-y-5">
+                        <!-- Header matching reference image: Title + Gold Horizontal Line -->
+                        <div class="flex items-center gap-3">
+                            <h2 class="text-2xl font-bold text-poliwangi-navy whitespace-nowrap">Kerjasama</h2>
+                            <div class="rubrik-header-line"></div>
+                        </div>
+
+                        <!-- Top Featured Item (Big Thumbnail 16:9 + Title + Date) -->
+                        <article onclick="switchView('detail-berita')" class="group cursor-pointer">
+                            <div class="overflow-hidden rounded-xl mb-3 shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=800&auto=format&fit=crop" 
+                                     alt="Featured Kerjasama" 
+                                     class="thumb-standard group-hover:scale-105 transition-transform duration-300">
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 group-hover:text-poliwangi-blue transition-colors leading-snug mb-1">
+                                Poliwangi Gandeng 15 Industri Global Perkuat Program Magang Vokasi 1 Tahun
+                            </h3>
+                            <p class="text-xs font-medium text-slate-400">22 Oktober 2026, 14.20</p>
+                        </article>
+
+                        <div class="border-t border-slate-200/80 pt-4 space-y-4">
+                            <!-- Sub Item 1 -->
+                            <article onclick="switchView('detail-berita')" class="flex gap-3 group cursor-pointer items-start">
+                                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=400&auto=format&fit=crop" 
+                                     alt="Sub Kerjasama 1" class="thumb-small rounded-lg shadow-sm">
+                                <div>
+                                    <h4 class="text-xs sm:text-sm font-bold text-slate-800 group-hover:text-poliwangi-blue transition-colors line-clamp-2 leading-snug">
+                                        Perluasan Kerjasama Riset Bersama Pemkab Banyuwangi
+                                    </h4>
+                                    <p class="text-[11px] font-medium text-slate-400 mt-1">19 Oktober 2026, 10.15</p>
+                                </div>
+                            </article>
+
+                            <!-- Sub Item 2 -->
+                            <article onclick="switchView('detail-berita')" class="flex gap-3 group cursor-pointer items-start">
+                                <img src="https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?q=80&w=400&auto=format&fit=crop" 
+                                     alt="Sub Kerjasama 2" class="thumb-small rounded-lg shadow-sm">
+                                <div>
+                                    <h4 class="text-xs sm:text-sm font-bold text-slate-800 group-hover:text-poliwangi-blue transition-colors line-clamp-2 leading-snug">
+                                        Poliwangi & Konsorsium PTN Jawa Timur Sepakati Transfer Teknologi
+                                    </h4>
+                                    <p class="text-[11px] font-medium text-slate-400 mt-1">16 Oktober 2026, 08.45</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <!-- ================= COLUMN 2: PRESTASI ================= -->
+                    <div class="flex flex-col space-y-5">
+                        <!-- Header matching reference image: Title + Gold Horizontal Line -->
+                        <div class="flex items-center gap-3">
+                            <h2 class="text-2xl font-bold text-poliwangi-navy whitespace-nowrap">Prestasi</h2>
+                            <div class="rubrik-header-line"></div>
+                        </div>
+
+                        <!-- Top Featured Item (Big Thumbnail 16:9 + Title + Date) -->
+                        <article onclick="switchView('detail-berita')" class="group cursor-pointer">
+                            <div class="overflow-hidden rounded-xl mb-3 shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop" 
+                                     alt="Featured Prestasi" 
+                                     class="thumb-standard group-hover:scale-105 transition-transform duration-300">
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 group-hover:text-poliwangi-blue transition-colors leading-snug mb-1">
+                                Tim Semar Poliwangi Sabet Juara 2 di Kontes Mobil Hemat Energi 2026
+                            </h3>
+                            <p class="text-xs font-medium text-slate-400">20 Oktober 2026, 15.26</p>
+                        </article>
+
+                        <div class="border-t border-slate-200/80 pt-4 space-y-4">
+                            <!-- Sub Item 1 -->
+                            <article onclick="switchView('detail-berita')" class="flex gap-3 group cursor-pointer items-start">
+                                <img src="https://images.unsplash.com/photo-1567168544646-208fa5d408fb?q=80&w=400&auto=format&fit=crop" 
+                                     alt="Sub Prestasi 1" class="thumb-small rounded-lg shadow-sm">
+                                <div>
+                                    <h4 class="text-xs sm:text-sm font-bold text-slate-800 group-hover:text-poliwangi-blue transition-colors line-clamp-2 leading-snug">
+                                        Poliwangi Kembali Sabet Predikat Tertinggi Akreditasi Unggul BAN-PT
+                                    </h4>
+                                    <p class="text-[11px] font-medium text-slate-400 mt-1">19 Oktober 2026, 09.35</p>
+                                </div>
+                            </article>
+
+                            <!-- Sub Item 2 -->
+                            <article onclick="switchView('detail-berita')" class="flex gap-3 group cursor-pointer items-start">
+                                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=400&auto=format&fit=crop" 
+                                     alt="Sub Prestasi 2" class="thumb-small rounded-lg shadow-sm">
+                                <div>
+                                    <h4 class="text-xs sm:text-sm font-bold text-slate-800 group-hover:text-poliwangi-blue transition-colors line-clamp-2 leading-snug">
+                                        17 Dosen Poliwangi Masuk Daftar Top 2% Ilmuwan Berpengaruh Dunia
+                                    </h4>
+                                    <p class="text-[11px] font-medium text-slate-400 mt-1">16 Oktober 2026, 12.49</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <!-- ================= COLUMN 3: PENELITIAN DAN INOVASI ================= -->
+                    <div class="flex flex-col space-y-5">
+                        <!-- Header matching reference image: Title + Gold Horizontal Line -->
+                        <div class="flex items-center gap-3">
+                            <h2 class="text-2xl font-bold text-poliwangi-navy whitespace-nowrap">Penelitian dan Inovasi</h2>
+                            <div class="rubrik-header-line"></div>
+                        </div>
+
+                        <!-- Top Featured Item (Big Thumbnail 16:9 + Title + Date) -->
+                        <article onclick="switchView('detail-berita')" class="group cursor-pointer">
+                            <div class="overflow-hidden rounded-xl mb-3 shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=800&auto=format&fit=crop" 
+                                     alt="Featured Penelitian" 
+                                     class="thumb-standard group-hover:scale-105 transition-transform duration-300">
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 group-hover:text-poliwangi-blue transition-colors leading-snug mb-1">
+                                Peneliti Poliwangi dan ICI-HAAS China Teliti Varietas Kentang Kebal Penyakit
+                            </h3>
+                            <p class="text-xs font-medium text-slate-400">20 Oktober 2026, 12.18</p>
+                        </article>
+
+                        <div class="border-t border-slate-200/80 pt-4 space-y-4">
+                            <!-- Sub Item 1 -->
+                            <article onclick="switchView('detail-berita')" class="flex gap-3 group cursor-pointer items-start">
+                                <img src="https://images.unsplash.com/photo-1507668077129-56e32842fceb?q=80&w=400&auto=format&fit=crop" 
+                                     alt="Sub Penelitian 1" class="thumb-small rounded-lg shadow-sm">
+                                <div>
+                                    <h4 class="text-xs sm:text-sm font-bold text-slate-800 group-hover:text-poliwangi-blue transition-colors line-clamp-2 leading-snug">
+                                        Teliti Pergerakan Air Otomatis, Tim Mahasiswa Ciptakan Smart Irrigation
+                                    </h4>
+                                    <p class="text-[11px] font-medium text-slate-400 mt-1">19 Oktober 2026, 16.13</p>
+                                </div>
+                            </article>
+
+                            <!-- Sub Item 2 -->
+                            <article onclick="switchView('detail-berita')" class="flex gap-3 group cursor-pointer items-start">
+                                <img src="https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=400&auto=format&fit=crop" 
+                                     alt="Sub Penelitian 2" class="thumb-small rounded-lg shadow-sm">
+                                <div>
+                                    <h4 class="text-xs sm:text-sm font-bold text-slate-800 group-hover:text-poliwangi-blue transition-colors line-clamp-2 leading-snug">
+                                        43 Tim PKM Poliwangi Siap Berlaga di PIMNAS Ke-39 Tahun 2026
+                                    </h4>
+                                    <p class="text-[11px] font-medium text-slate-400 mt-1">16 Oktober 2026, 15.49</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CAMPUS STATS BANNER -->
+        <section class="bg-poliwangi-navy text-white py-12 border-t border-poliwangi-dark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div>
+                        <div class="text-3xl md:text-4xl font-extrabold text-poliwangi-gold mb-1">5.500+</div>
+                        <div class="text-xs uppercase tracking-wider text-slate-300 font-semibold">Mahasiswa Aktif</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl md:text-4xl font-extrabold text-poliwangi-gold mb-1">14</div>
+                        <div class="text-xs uppercase tracking-wider text-slate-300 font-semibold">Program Studi Vokasi</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl md:text-4xl font-extrabold text-poliwangi-gold mb-1">120+</div>
+                        <div class="text-xs uppercase tracking-wider text-slate-300 font-semibold">Mitra Industri Nasional</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl md:text-4xl font-extrabold text-poliwangi-gold mb-1">94%</div>
+                        <div class="text-xs uppercase tracking-wider text-slate-300 font-semibold">Serapan Lulusan Bekerja</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ========================================== -->
+    <!-- VIEW 2: DETAIL BERITA PAGE CONTENT -->
+    <!-- REQUIREMENT 9: HALAMAN BERITA DENGAN SIDEBAR (ARTIKEL POPULER & TERKAIT) -->
+    <!-- ========================================== -->
+    <main id="view-detail-berita" class="hidden flex-grow transition-opacity duration-300 bg-white">
+        
+        <!-- Breadcrumb & Top Banner -->
+        <div class="bg-slate-100 border-b border-slate-200 py-4">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <nav class="flex text-xs font-semibold text-slate-500 space-x-2">
+                    <button onclick="switchView('beranda')" class="hover:text-poliwangi-blue">Beranda</button>
+                    <span>/</span>
+                    <button onclick="switchView('beranda')" class="hover:text-poliwangi-blue">Berita & Informasi</button>
+                    <span>/</span>
+                    <span class="text-poliwangi-navy truncate max-w-xs sm:max-w-md">Tim Robotik Poliwangi Raih Juara Pertama...</span>
+                </nav>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <!-- 2-Column Layout (Article 70% Left, Sidebar 30% Right) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                
+                <!-- MAIN ARTICLE CONTENT (LEFT) -->
+                <div class="lg:col-span-8 space-y-6">
+                    <div>
+                        <span class="bg-poliwangi-navy text-poliwangi-gold text-xs font-extrabold px-3 py-1 rounded-md uppercase tracking-wider">
+                            Berita Terbaru
+                        </span>
+                        <h1 class="text-2xl sm:text-3xl md:text-4xl font-black text-poliwangi-navy mt-4 leading-tight">
+                            Tim Robotik Poliwangi Raih Juara Pertama Kompetisi Inovasi Teknologi Nasional 2026
+                        </h1>
+                        
+                        <!-- Metadata -->
+                        <div class="flex flex-wrap items-center text-xs text-slate-500 gap-4 mt-4 pb-4 border-b border-slate-200">
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-user-pen text-poliwangi-blue"></i> Humas Poliwangi</span>
+                            <span class="flex items-center gap-1.5"><i class="fa-regular fa-calendar-check text-poliwangi-gold"></i> 26 Oktober 2026</span>
+                            <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock"></i> 09.15 WIB</span>
+                            <span class="flex items-center gap-1.5"><i class="fa-regular fa-eye"></i> 1.420x Dibaca</span>
+                        </div>
+                    </div>
+
+                    <!-- Main Article Standardized Image (16:9) -->
+                    <div class="rounded-2xl overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1200&auto=format&fit=crop" 
+                             alt="Tim Robotik Poliwangi" 
+                             class="thumb-standard w-full">
+                        <p class="text-[11px] text-slate-500 italic p-3 bg-slate-50 text-center border-t border-slate-100">
+                            Foto: Tim Mahasiswa Politeknik Negeri Banyuwangi saat penganugerahan trofi Juara 1 Kompetisi Teknologi Nasional 2026.
+                        </p>
+                    </div>
+
+                    <!-- Article Body Text -->
+                    <div class="prose max-w-none text-slate-700 leading-relaxed text-sm sm:text-base space-y-4 pt-2">
+                        <p class="font-semibold text-slate-900 leading-normal text-base sm:text-lg">
+                            BANYUWANGI – Mahasiswa Politeknik Negeri Banyuwangi (Poliwangi) kembali mengharumkan nama institusi di kancah nasional. Tim Robotik Vokasi Poliwangi sukses meraih Juara Pertama dalam ajang tahunan Kompetisi Inovasi Teknologi Nasional 2026 yang berlangsung di Jakarta.
+                        </p>
+                        <p>
+                            Karya inovasi yang diusung oleh gabungan mahasiswa Jurusan Teknik Informatika dan Teknik Mesin ini diberi nama <strong>"AgroBot Precision v4"</strong>. Robotik berbasis Internet of Things (IoT) dan kecerdasan buatan (AI) ini dirancang khusus untuk membantu para petani lokal dalam proses penanaman bibit serta pemantauan kualitas hara tanah secara otomatis.
+                        </p>
+                        
+                        <blockquote class="border-l-4 border-poliwangi-gold pl-4 py-2 italic bg-amber-50/50 rounded-r-lg text-slate-800 font-medium my-6">
+                            "Inovasi ini berawal dari keluhan para petani di kawasan Banyuwangi mengenai efisiensi waktu penanaman bibit. Kami berupaya menghadirkan solusi konkret berbasis teknologi terjangkau yang ramah guna," ujar Ketua Tim Inovasi Mahasiswa Poliwangi.
+                        </blockquote>
+
+                        <p>
+                            Direktur Poliwangi mengapresiasi tinggi capaian membanggakan ini. Menurut beliau, kemenangan ini membuktikan bahwa pendidikan vokasi berbasis praktik di Politeknik Negeri Banyuwangi mampu mencetak SDM unggul yang kompetitif, inovatif, dan siap memecahkan persoalan riil di masyarakat.
+                        </p>
+
+                        <p>
+                            Diharapkan hasil riset terapan ini tidak berhenti pada level kompetisi saja, melainkan dapat diproduksi secara massal melalui hilirisasi hasil penelitian bekerjasama dengan mitra industri manufaktur nasional.
+                        </p>
+                    </div>
+
+                    <!-- Share Article Buttons -->
+                    <div class="pt-6 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4">
+                        <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">Bagikan Artikel Ini:</span>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="shareLink('WhatsApp')" class="w-9 h-9 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center transition"><i class="fa-brands fa-whatsapp"></i></button>
+                            <button onclick="shareLink('Facebook')" class="w-9 h-9 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center transition"><i class="fa-brands fa-facebook-f"></i></button>
+                            <button onclick="shareLink('Twitter')" class="w-9 h-9 rounded-full bg-sky-500 hover:bg-sky-600 text-white flex items-center justify-center transition"><i class="fa-brands fa-x-twitter"></i></button>
+                            <button onclick="copyCurrentUrl()" class="w-9 h-9 rounded-full bg-slate-700 hover:bg-slate-800 text-white flex items-center justify-center transition"><i class="fa-solid fa-link"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Back to Home Button -->
+                    <div class="pt-4">
+                        <button onclick="switchView('beranda')" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-slate-100 hover:bg-poliwangi-navy text-slate-700 hover:text-white font-bold text-xs transition">
+                            <i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SIDEBAR COLUMN (RIGHT - REQUIREMENT 9) -->
+                <aside class="lg:col-span-4 space-y-8">
+                    
+                    <!-- WIDGET 1: ARTIKEL POPULER -->
+                    <div class="bg-slate-50 border border-slate-200/90 rounded-2xl p-6 shadow-sm">
+                        <!-- Header with Gold Accent -->
+                        <div class="flex items-center gap-3 mb-6">
+                            <h3 class="text-xl font-bold text-poliwangi-navy whitespace-nowrap">Artikel Populer</h3>
+                            <div class="rubrik-header-line"></div>
+                        </div>
+
+                        <!-- Populer Item List (Numbered 1-4) -->
+                        <div class="space-y-4">
+                            
+                            <!-- Item 1 -->
+                            <div onclick="switchView('detail-berita')" class="flex gap-3 items-start group cursor-pointer pb-3 border-b border-slate-200/70">
+                                <span class="text-2xl font-black text-poliwangi-gold w-6 shrink-0">1</span>
+                                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=300&auto=format&fit=crop" 
+                                     alt="Populer 1" class="w-20 h-14 object-cover rounded-lg shadow-sm shrink-0">
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-800 group-hover:text-poliwangi-blue transition-colors line-clamp-2 leading-snug">
+                                        Tim Semar Poliwangi Sabet Juara 2 di Kontes Mobil Hemat Energi
+                                    </h4>
+                                    <span class="text-[10px] text-slate-400 font-medium block mt-1"><i class="fa-regular fa-eye mr-1"></i> 3.820 views</span>
+                                </div>
+                            </div>
+
+                            <!-- Item 2 -->
+                            <div onclick="switchView('detail-berita')" class="flex gap-3 items-start group cursor-pointer pb-3 border-b border-slate-200/70">
+                                <span class="text-2xl font-black text-slate-300 group-hover:text-poliwangi-gold w-6 shrink-0">2</span>
+                                <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=300&auto=format&fit=crop" 
+                                     alt="Populer 2" class="w-20 h-14 object-cover rounded-lg shadow-sm shrink-0">
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-800 group-hover:text-poliwangi-blue transition-colors line-clamp-2 leading-snug">
+                                        Poliwangi Resmi Tanda Tangani MoU Magang Industri dengan PT KAI
+                                    </h4>
+                                    <span class="text-[10px] text-slate-400 font-medium block mt-1"><i class="fa-regular fa-eye mr-1"></i> 2.940 views</span>
+                                </div>
+                            </div>
+
+                            <!-- Item 3 -->
+                            <div onclick="switchView('detail-berita')" class="flex gap-3 items-start group cursor-pointer pb-3 border-b border-slate-200/70">
+                                <span class="text-2xl font-black text-slate-300 group-hover:text-poliwangi-gold w-6 shrink-0">3</span>
+                                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=300&auto=format&fit=crop" 
+                                     alt="Populer 3" class="w-20 h-14 object-cover rounded-lg shadow-sm shrink-0">
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-800 group-hover:text-poliwangi-blue transition-colors line-clamp-2 leading-snug">
+                                        Peneliti Poliwangi & ICI-HAAS China Teliti Varietas Kentang Kebal
+                                    </h4>
+                                    <span class="text-[10px] text-slate-400 font-medium block mt-1"><i class="fa-regular fa-eye mr-1"></i> 2.150 views</span>
+                                </div>
+                            </div>
+
+                            <!-- Item 4 -->
+                            <div onclick="switchView('detail-berita')" class="flex gap-3 items-start group cursor-pointer">
+                                <span class="text-2xl font-black text-slate-300 group-hover:text-poliwangi-gold w-6 shrink-0">4</span>
+                                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=300&auto=format&fit=crop" 
+                                     alt="Populer 4" class="w-20 h-14 object-cover rounded-lg shadow-sm shrink-0">
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-800 group-hover:text-poliwangi-blue transition-colors line-clamp-2 leading-snug">
+                                        Penerapan Curriculum OBE Menghadapi Era Artificial Intelligence
+                                    </h4>
+                                    <span class="text-[10px] text-slate-400 font-medium block mt-1"><i class="fa-regular fa-eye mr-1"></i> 1.890 views</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- WIDGET 2: ARTIKEL TERKAIT / TERBARU -->
+                    <div class="bg-slate-50 border border-slate-200/90 rounded-2xl p-6 shadow-sm">
+                        <!-- Header with Gold Accent -->
+                        <div class="flex items-center gap-3 mb-6">
+                            <h3 class="text-xl font-bold text-poliwangi-navy whitespace-nowrap">Artikel Terkait</h3>
+                            <div class="rubrik-header-line"></div>
+                        </div>
+
+                        <!-- Related List -->
+                        <div class="space-y-4">
+                            
+                            <!-- Related 1 -->
+                            <div onclick="switchView('detail-berita')" class="flex gap-3 items-start group cursor-pointer pb-3 border-b border-slate-200/70">
+                                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=300&auto=format&fit=crop" 
+                                     alt="Terkait 1" class="w-20 h-14 object-cover rounded-lg shadow-sm shrink-0">
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-800 group-hover:text-poliwangi-blue transition-colors line-clamp-2 leading-snug">
+                                        Perluasan Kerjasama Riset Bersama Pemkab Banyuwangi
+                                    </h4>
+                                    <span class="text-[10px] text-slate-400 font-medium block mt-1"><i class="fa-regular fa-calendar mr-1"></i> 19 Okt 2026</span>
+                                </div>
+                            </div>
+
+                            <!-- Related 2 -->
+                            <div onclick="switchView('detail-berita')" class="flex gap-3 items-start group cursor-pointer pb-3 border-b border-slate-200/70">
+                                <img src="https://images.unsplash.com/photo-1507668077129-56e32842fceb?q=80&w=300&auto=format&fit=crop" 
+                                     alt="Terkait 2" class="w-20 h-14 object-cover rounded-lg shadow-sm shrink-0">
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-800 group-hover:text-poliwangi-blue transition-colors line-clamp-2 leading-snug">
+                                        Teliti Pergerakan Air Otomatis, Tim Mahasiswa Ciptakan Smart Irrigation
+                                    </h4>
+                                    <span class="text-[10px] text-slate-400 font-medium block mt-1"><i class="fa-regular fa-calendar mr-1"></i> 19 Okt 2026</span>
+                                </div>
+                            </div>
+
+                            <!-- Related 3 -->
+                            <div onclick="switchView('detail-berita')" class="flex gap-3 items-start group cursor-pointer">
+                                <img src="https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=300&auto=format&fit=crop" 
+                                     alt="Terkait 3" class="w-20 h-14 object-cover rounded-lg shadow-sm shrink-0">
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-800 group-hover:text-poliwangi-blue transition-colors line-clamp-2 leading-snug">
+                                        43 Tim PKM Poliwangi Siap Berlaga di PIMNAS Ke-39
+                                    </h4>
+                                    <span class="text-[10px] text-slate-400 font-medium block mt-1"><i class="fa-regular fa-calendar mr-1"></i> 16 Okt 2026</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- WIDGET 3: CALLOUT BANNER -->
+                    <div class="bg-gradient-to-br from-poliwangi-navy to-poliwangi-blue text-white rounded-2xl p-6 shadow-md text-center">
+                        <i class="fa-solid fa-graduation-cap text-4xl text-poliwangi-gold mb-3"></i>
+                        <h4 class="text-base font-bold mb-2">Pendaftaran Mahasiswa Baru</h4>
+                        <p class="text-xs text-slate-200 mb-4">Bergabunglah menjadi bagian dari talenta vokasi unggul Indonesia di Poliwangi.</p>
+                        <a href="#" class="inline-block px-5 py-2.5 bg-poliwangi-gold hover:bg-poliwangi-goldhover text-poliwangi-dark text-xs font-extrabold rounded-xl transition shadow-sm">
+                            Informasi PMB 2026
+                        </a>
+                    </div>
+
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-poliwangi-dark text-slate-400 text-xs border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                
+                <!-- Campus Identity -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="https://v2.poliwangi.ac.id/wp-content/uploads/2024/07/LOGO-POLIWANGI-REV-2.png" 
+                             onerror="this.onerror=null; this.src='https://placehold.co/60x60/002b5b/ffffff?text=POLIWANGI';" 
+                             alt="Logo Poliwangi Footer" class="h-10 w-auto">
+                        <span class="text-sm font-bold text-white tracking-wide">POLITEKNIK NEGERI BANYUWANGI</span>
+                    </div>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        Jalan Raya Jember KM 13 Labanasem, Kabat, Banyuwangi, Jawa Timur 68461.
+                    </p>
+                    <p class="text-xs">
+                        <strong>Telp:</strong> (0333) 636780<br>
+                        <strong>Email:</strong> humas@poliwangi.ac.id
+                    </p>
+                </div>
+
+                <!-- Quick Links 1 -->
+                <div>
+                    <h4 class="text-sm font-bold text-white mb-4 border-l-2 border-poliwangi-gold pl-2">Akademik & Jurusan</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-poliwangi-gold transition">Teknik Informatika</a></li>
+                        <li><a href="#" class="hover:text-poliwangi-gold transition">Teknik Mesin</a></li>
+                        <li><a href="#" class="hover:text-poliwangi-gold transition">Teknik Sipil</a></li>
+                        <li><a href="#" class="hover:text-poliwangi-gold transition">Teknologi Hasil Pertanian</a></li>
+                        <li><a href="#" class="hover:text-poliwangi-gold transition">Manajemen Bisnis Pariwisata</a></li>
+                    </ul>
+                </div>
+
+                <!-- Quick Links 2 -->
+                <div>
+                    <h4 class="text-sm font-bold text-white mb-4 border-l-2 border-poliwangi-gold pl-2">Layanan Kampus</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-poliwangi-gold transition">Sistem Informasi Akademik (SIAKAD)</a></li>
+                        <li><a href="#" class="hover:text-poliwangi-gold transition">Portal Perpustakaan Digital</a></li>
+                        <li><a href="#" class="hover:text-poliwangi-gold transition">Lembaga Penelitian & Pengabdian (LPPM)</a></li>
+                        <li><a href="#" class="hover:text-poliwangi-gold transition">Pusat Karir & Alumni</a></li>
+                        <li><a href="#" class="hover:text-poliwangi-gold transition">PPID & Layanan Informasi</a></li>
+                    </ul>
+                </div>
+
+                <!-- Map / Media -->
+                <div>
+                    <h4 class="text-sm font-bold text-white mb-4 border-l-2 border-poliwangi-gold pl-2">Lokasi Kampus</h4>
+                    <div class="rounded-xl overflow-hidden border border-slate-700 h-32 bg-slate-800 flex items-center justify-center relative">
+                        <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=400&auto=format&fit=crop" 
+                             alt="Peta Banyuwangi" class="w-full h-full object-cover opacity-60">
+                        <a href="https://maps.google.com" target="_blank" class="absolute bg-poliwangi-navy/90 hover:bg-poliwangi-blue text-white text-[11px] font-bold px-3 py-1.5 rounded-lg shadow backdrop-blur-sm">
+                            <i class="fa-solid fa-map-pin text-poliwangi-gold mr-1"></i> Buka Google Maps
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="border-t border-slate-800 mt-10 pt-6 text-center text-slate-500 text-[11px] flex flex-col sm:flex-row justify-between items-center gap-2">
+                <p>&copy; 2026 Politeknik Negeri Banyuwangi (Poliwangi). All Rights Reserved.</p>
+                <p>Designed with standard responsive layout & proportional assets.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        // Switch between Beranda View and Detail Berita View
+        function switchView(viewName) {
+            const berandaView = document.getElementById('view-beranda');
+            const detailView = document.getElementById('view-detail-berita');
+            const navBeranda = document.getElementById('nav-beranda');
+            const navDetail = document.getElementById('nav-detail');
+
+            if (viewName === 'detail-berita') {
+                berandaView.classList.add('hidden');
+                detailView.classList.remove('hidden');
+                
+                navBeranda.classList.remove('text-poliwangi-navy', 'bg-slate-100');
+                navDetail.classList.add('bg-slate-100');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                detailView.classList.add('hidden');
+                berandaView.classList.remove('hidden');
+                
+                navBeranda.classList.add('text-poliwangi-navy');
+                navDetail.classList.remove('bg-slate-100');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Hero Banner Carousel Logic
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-item');
+        const dots = document.querySelectorAll('.carousel-dot');
+
+        function updateCarousel() {
+            slides.forEach((slide, idx) => {
+                if (idx === currentSlide) {
+                    slide.classList.remove('opacity-0');
+                    slide.classList.add('opacity-100');
+                } else {
+                    slide.classList.remove('opacity-100');
+                    slide.classList.add('opacity-0');
+                }
+            });
+
+            dots.forEach((dot, idx) => {
+                if (idx === currentSlide) {
+                    dot.className = "carousel-dot w-8 h-2 rounded-full bg-poliwangi-gold transition-all duration-300";
+                } else {
+                    dot.className = "carousel-dot w-3 h-2 rounded-full bg-white/60 hover:bg-white transition-all duration-300";
+                }
+            });
+        }
+
+        function nextHeroSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateCarousel();
+        }
+
+        function prevHeroSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateCarousel();
+        }
+
+        function setHeroSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        // Auto-play hero carousel every 5 seconds
+        setInterval(nextHeroSlide, 5000);
+
+        // Mobile Menu Drawer Toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Download Document Toast/Alert replacement
+        function downloadAnnouncement(filename) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-5 right-5 z-50 bg-poliwangi-navy text-white px-5 py-3 rounded-xl shadow-2xl border border-poliwangi-gold flex items-center gap-3 transition-all duration-300 transform translate-y-0';
+            toast.innerHTML = `
+                <i class="fa-solid fa-file-arrow-down text-poliwangi-gold text-xl"></i>
+                <div class="text-xs">
+                    <p class="font-bold">Mengunduh Berkas Pengumuman</p>
+                    <p class="text-slate-300">${filename}</p>
+                </div>
+            `;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Share Button Feedback
+        function shareLink(platform) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-5 right-5 z-50 bg-slate-800 text-white px-4 py-2.5 rounded-xl shadow-xl text-xs flex items-center gap-2';
+            toast.innerHTML = `<i class="fa-solid fa-share-nodes text-poliwangi-gold"></i> Membuka tautan berbagi ke ${platform}...`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2500);
+        }
+
+        function copyCurrentUrl() {
+            const dummy = document.createElement('input');
+            document.body.appendChild(dummy);
+            dummy.value = window.location.href;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-5 right-5 z-50 bg-emerald-700 text-white px-4 py-2.5 rounded-xl shadow-xl text-xs flex items-center gap-2';
+            toast.innerHTML = `<i class="fa-solid fa-check-circle text-white"></i> Tautan artikel berhasil disalin!`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2500);
+        }
+    </script>
+</body>
+</html>
